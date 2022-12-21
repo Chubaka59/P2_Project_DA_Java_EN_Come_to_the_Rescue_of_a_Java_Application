@@ -3,6 +3,8 @@ package com.hemebiotech.analytics;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.List;
+import java.util.Map;
 
 public class AnalyticsCounter {
 	private static int headacheCount = 0;
@@ -11,24 +13,30 @@ public class AnalyticsCounter {
 	
 	public static void main(String args[]) throws Exception {
 		// first get input
-		BufferedReader reader = new BufferedReader (new FileReader("Project02Eclipse/symptoms.txt"));
-		String line = reader.readLine();
+//		BufferedReader reader = new BufferedReader (new FileReader("Project02Eclipse/symptoms.txt"));
+//		String line = reader.readLine();
 
-		while (line != null) {
-			System.out.println("symptom from file: " + line);
-			if (line.equals("headache")) {
-				headacheCount++;
-				System.out.println("number of headaches: " + headacheCount);
-			}
-			else if (line.equals("rash")) {
-				rashCount++;
-			}
-			else if (line.contains("pupils")) {
-				pupilCount++;
-			}
+		SymptomReader symptomsReader = new ReadSymptomDataFromFileImpl("Project02Eclipse/symptoms.txt");
+		List<String> symptomsList = symptomsReader.getSymptoms();
 
-			line = reader.readLine();	// get another symptom
-		}
+//		while (line != null) {
+//			System.out.println("symptom from file: " + line);
+//			if (line.equals("headache")) {
+//				headacheCount++;
+//				System.out.println("number of headaches: " + headacheCount);
+//			}
+//			else if (line.equals("rash")) {
+//				rashCount++;
+//			}
+//			else if (line.contains("pupils")) {
+//				pupilCount++;
+//			}
+//
+//			line = reader.readLine();	// get another symptom
+//		}
+
+		SymptomListToMapConverter listToMap = new SymptomListToMapConverterImpl();
+		Map<String, Integer> symptomsMap = listToMap.compute(symptomsList);
 		
 		// next generate output
 		FileWriter writer = new FileWriter ("result.out");
