@@ -38,3 +38,4 @@ public class WriteSymptomDataToFileImpl implements SymptomWriter {
         }
     }
 }
+
