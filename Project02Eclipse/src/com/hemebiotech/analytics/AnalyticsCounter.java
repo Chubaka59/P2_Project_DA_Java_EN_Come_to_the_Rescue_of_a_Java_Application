@@ -39,10 +39,13 @@ public class AnalyticsCounter {
 		Map<String, Integer> symptomsMap = listToMap.compute(symptomsList);
 		
 		// next generate output
-		FileWriter writer = new FileWriter ("result.out");
-		writer.write("headache: " + headacheCount + "\n");
-		writer.write("rash: " + rashCount + "\n");
-		writer.write("dialated pupils: " + pupilCount + "\n");
-		writer.close();
+//		FileWriter writer = new FileWriter ("result.out");
+//		writer.write("headache: " + headacheCount + "\n");
+//		writer.write("rash: " + rashCount + "\n");
+//		writer.write("dialated pupils: " + pupilCount + "\n");
+//		writer.close();
+
+		SymptomWriter results = new WriteSymptomDataToFileImpl("Project02Eclipse/result.out");
+		results.exportResults(symptomsMap);
 	}
 }
